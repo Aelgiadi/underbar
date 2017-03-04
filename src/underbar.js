@@ -98,7 +98,10 @@
     _.reject = function(collection, test) {
         var rejected = _.filter(collection, test)
         var passed = _.filter(collection, function(val) {
-            if(_.indexOf(rejected, val) == -1){return val;}})
+            if (_.indexOf(rejected, val) == -1) {
+                return val;
+            }
+        })
 
         return passed;
         // TIP: see if you can re-use _.filter() here, without simply
@@ -106,7 +109,15 @@
     };
 
     // Produce a duplicate-free version of the array.
-    _.uniq = function(array) {};
+    _.uniq = function(array) {
+        var unique = [];
+        for (var i in array) {
+            if (_.indexOf(unique, array[i]) === -1) {
+                unique.push(array[i]);
+            }
+        }
+        return unique;
+    };
 
 
     // Return the results of applying an iterator to each element.
