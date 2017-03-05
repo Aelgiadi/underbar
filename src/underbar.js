@@ -182,7 +182,7 @@
         var isUndefined = arguments.length < 3;
         //Check to see if accumulator is provided.
         _.each(collection, function(elem, index, collection) {
-          // if accumulator is provided then accumulator is equal to the result of running each function of the collection with the iterator.
+            // if accumulator is provided then accumulator is equal to the result of running _.each function of the collection with the iterator.
             if (isUndefined) {
                 isUndefined = false;
                 accumulator = elem;
@@ -209,6 +209,17 @@
     // Determine whether all of the elements match a truth test.
     _.every = function(collection, iterator) {
         // TIP: Try re-using reduce() here.
+        var isIterator = arguments.length < 2;
+        //check to see if callback is provided;
+        if (isIterator) {
+            return _.reduce(collection, function(allHere, item) {
+                return !!_.identity(item) && allHere;
+            }, true);
+        } else {
+            return _.reduce(collection, function(allHere, item) {
+                return !!iterator(item) && allHere;
+            }, true);
+        }
     };
 
     // Determine whether any of the elements pass a truth test. If no iterator is
