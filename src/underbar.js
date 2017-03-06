@@ -212,12 +212,16 @@
         var isIterator = arguments.length < 2;
         //check to see if callback is provided;
         if (isIterator) {
+            //if no call back provided then implement _.identity as call back.
             return _.reduce(collection, function(allHere, item) {
                 return !!_.identity(item) && allHere;
+                // make falsy or truthy elements false or true.
             }, true);
         } else {
+            //if callback is provided then run through reduce and check for all elements to be the same.
             return _.reduce(collection, function(allHere, item) {
                 return !!iterator(item) && allHere;
+                //make falsy or truthy elements false or true.
             }, true);
         }
     };
@@ -225,6 +229,17 @@
     // Determine whether any of the elements pass a truth test. If no iterator is
     // provided, provide a default one
     _.some = function(collection, iterator) {
+        var isIterator = arguments.length < 2;
+        if (isIterator) {
+            return !(_.every(collection, function(item) {
+                return !_.identity(item);
+            }))
+        } else {
+            return !(_.every(collection, function(item) {
+                return !iterator(item);
+            }))
+        }
+
         // TIP: There's a very clever way to re-use every() here.
     };
 
