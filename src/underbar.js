@@ -370,7 +370,23 @@
     // TIP: This function's test suite will ask that you not modify the original
     // input array. For a tip on how to make a copy of an array, see:
     // http://mdn.io/Array.prototype.slice
-    _.shuffle = function(array) {};
+    _.shuffle = function(array) {
+        var shuffledArr = array.slice();
+        var i = 0;
+        var j,
+            temp = null;
+
+        for (i = shuffledArr.length - 1; i > 0; i--) {
+            j = Math.floor(Math.random() * (i + 1))
+            temp = shuffledArr[i]
+            shuffledArr[i] = shuffledArr[j]
+            shuffledArr[j] = temp
+        }
+
+        return shuffledArr;
+
+    };
+
 
 
     /**
